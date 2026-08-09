@@ -14,7 +14,7 @@ This repository contains the complete, self-contained code to:
 
 1. **Reproduce all 6 paper figures** exactly as they appear in the submission
 2. **Run the full BCD simulation** with verified monotone convergence
-3. **Verify key numerical claims** (47% ESR, α=1.34, β=0.28, R²=0.95)
+3. **Verify key numerical claims** (53.6% ESR, α=1.34, β=-0.28, R²=0.95)
 4. **Run the test suite** (65+ unit and integration tests)
 
 All results are deterministic: fixed random seeds produce identical outputs
