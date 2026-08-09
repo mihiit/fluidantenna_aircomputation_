@@ -186,7 +186,7 @@ The BCD algorithm (Section III of the paper) alternates four sub-steps per itera
 
 | Metric | Paper Value | Code Reproduces (MC = 500) |
 |---|---|---|
-| Max ESR at ε = 0.06, N = 6, K = 8 | 47% | ≈ 47% |
+| Max ESR at ε = 0.06, N = 6, K = 8 | 53.6% | ≈ 53% |
 | BCD convergence | 12–16 iterations | 12–16 iterations |
 | Scaling-law exponent α (K) | 1.34 | ≈ 1.34 |
 | Scaling-law exponent β (N) | −0.28 | ≈ −0.28 |
