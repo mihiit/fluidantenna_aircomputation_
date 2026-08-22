@@ -1,148 +1,313 @@
 """
 channel.py
 ==========
-Channel model for FAA-AirComp system (Section II-A, Eq. 1).
 
-Multi-path channel from K single-antenna IoT devices to an N-port
-fluid antenna array (FAA) at the access point.
+Channel model for FAA-AirComp system (Section II-A, Eq. (1)).
 
-Reference:
-    Mihit Nanda, "Energy-Efficient Fluid Antenna Array for
-    Over-the-Air Computation: Joint Port Selection and Power Control,"
-    IEEE Wireless Communications Letters, submitted 2025.
+The multipath channel realization (g_kl, phi_kl) is sampled ONCE.
+Changing the APV only changes the spatial phase term.
+
+This is critical for valid APV optimization.
 """
 
 import numpy as np
 from .config import SystemConfig
 
 
-def build_channel_matrix(pos_wl: np.ndarray,
-                         bk: np.ndarray,
-                         K: int,
-                         cfg: SystemConfig,
-                         rng: np.random.Generator) -> np.ndarray:
+def sample_path_loss(
+    K: int,
+    cfg: SystemConfig,
+    rng: np.random.Generator,
+    d_override: np.ndarray = None,
+) -> tuple:
     """
-    Build the N×K complex channel matrix H(t) for given port positions.
+    Sample device distances and compute normalized path-loss coefficients.
 
-    Implements Eq. (1):
-        h_k(x) = sqrt(β_k) Σ_{l=1}^{Lp} g_kl exp(j2π x sin φ_kl)
-
-    Parameters
-    ----------
-    pos_wl : (N,) array of port positions in wavelengths ∈ [0, L/λ]
-    bk     : (K,) large-scale path-loss coefficients (normalised)
-    K      : number of devices
-    cfg    : SystemConfig instance
-    rng    : numpy random Generator
-
-    Returns
-    -------
-    H : (N, K) complex channel matrix
-    """
-    N = len(pos_wl)
-    H = np.zeros((N, K), dtype=complex)
-    for k in range(K):
-        for _ in range(cfg.Lp):
-            g   = (rng.standard_normal() + 1j * rng.standard_normal()) / np.sqrt(2)
-            phi = rng.uniform(-np.pi / 2, np.pi / 2)
-            H[:, k] += np.sqrt(bk[k]) * g * np.exp(
-                1j * 2 * np.pi * pos_wl * np.sin(phi)
-            )
-    return H
-
-
-def sample_path_loss(K: int,
-                     cfg: SystemConfig,
-                     rng: np.random.Generator,
-                     d_override: np.ndarray = None) -> tuple:
-    """
-    Sample device distances and compute normalised path-loss coefficients.
-
-    Parameters
-    ----------
-    K           : number of devices
-    cfg         : SystemConfig
-    rng         : numpy random Generator
-    d_override  : if not None, use these distances instead of sampling
-
-    Returns
-    -------
-    dk : (K,) distances in metres
-    bk : (K,) normalised path-loss  β_k = d_k^{-α} / mean(d^{-α})
+    Paper:
+        beta_k = d_k^{-alpha}
+        d_k in [5, 20] m
+        mean(beta) = 1
     """
     if d_override is not None:
         dk = np.asarray(d_override, dtype=float)
+        if dk.shape != (K,):
+            raise ValueError(
+                f"d_override must have shape ({K},), got {dk.shape}"
+            )
     else:
         dk = rng.uniform(cfg.d_min, cfg.d_max, K)
+
+    if np.any(dk <= 0):
+        raise ValueError("All device distances must be positive.")
+
     bk = dk ** (-cfg.path_loss_exp)
+
+    # Paper normalization: mean(beta) = 1
     bk /= bk.mean()
+
     return dk, bk
 
 
-def uniform_port_positions(N: int, cfg: SystemConfig) -> np.ndarray:
+def sample_multipath(
+    K: int,
+    cfg: SystemConfig,
+    rng: np.random.Generator,
+) -> tuple:
     """
-    Uniformly spaced initial port positions in wavelengths ∈ [0, L/λ].
-    Used as starting point and for fixed-array (FPA) baseline.
+    Sample the fixed multipath realization.
+
+    For each device k and path l:
+        g_kl ~ CN(0, 1)
+        phi_kl ~ Uniform[-pi/2, pi/2]
+
+    These values remain FIXED while APV positions are optimized.
     """
+    # Complex Gaussian CN(0,1)
+    g = (
+        rng.standard_normal((K, cfg.Lp))
+        + 1j * rng.standard_normal((K, cfg.Lp))
+    ) / np.sqrt(2.0)
+
+    # AoA / path angle
+    phi = rng.uniform(
+        -np.pi / 2,
+        np.pi / 2,
+        size=(K, cfg.Lp),
+    )
+
+    return g, phi
+
+
+def build_channel_matrix(
+    pos_wl: np.ndarray,
+    bk: np.ndarray,
+    K: int,
+    cfg: SystemConfig,
+    g: np.ndarray,
+    phi: np.ndarray,
+) -> np.ndarray:
+    """
+    Build the N x K channel matrix for a GIVEN APV.
+
+    Implements Eq. (1):
+        h_k(x) =
+            sqrt(beta_k)
+            sum_l g_kl exp(j 2 pi x sin(phi_kl))
+
+    IMPORTANT:
+        g and phi are NOT regenerated here.
+        The same physical channel realization must be used
+        for every candidate APV.
+    """
+    pos_wl = np.asarray(pos_wl, dtype=float)
+    bk = np.asarray(bk, dtype=float)
+
+    N = len(pos_wl)
+
+    if bk.shape != (K,):
+        raise ValueError(
+            f"bk must have shape ({K},), got {bk.shape}"
+        )
+
+    if g.shape != (K, cfg.Lp):
+        raise ValueError(
+            f"g must have shape ({K}, {cfg.Lp}), got {g.shape}"
+        )
+
+    if phi.shape != (K, cfg.Lp):
+        raise ValueError(
+            f"phi must have shape ({K}, {cfg.Lp}), got {phi.shape}"
+        )
+
+    H = np.zeros((N, K), dtype=complex)
+
+    for k in range(K):
+        h_k = np.zeros(N, dtype=complex)
+
+        for l in range(cfg.Lp):
+            spatial_phase = np.exp(
+                1j
+                * 2.0
+                * np.pi
+                * pos_wl
+                * np.sin(phi[k, l])
+            )
+            h_k += g[k, l] * spatial_phase
+
+        H[:, k] = np.sqrt(bk[k]) * h_k
+
+    return H
+
+
+def uniform_port_positions(
+    N: int,
+    cfg: SystemConfig,
+) -> np.ndarray:
+    """
+    Uniformly spaced initial positions.
+
+    Positions are represented in wavelengths.
+    The aperture is [0, L/lambda] = [0, 5].
+    """
+    if N < 1:
+        raise ValueError("N must be >= 1.")
+
+    if N > 1:
+        max_possible_ports = int(
+            np.floor(cfg.L_wl / cfg.min_sep_wl) + 1
+        )
+        if N > max_possible_ports:
+            raise ValueError(
+                f"N={N} cannot fit inside aperture "
+                f"L={cfg.L_wl} lambda with minimum spacing "
+                f"{cfg.min_sep_wl} lambda."
+            )
+
     return np.linspace(0.0, cfg.L_wl, N)
 
 
-def random_port_positions(N: int,
-                          cfg: SystemConfig,
-                          rng: np.random.Generator,
-                          max_tries: int = 2000) -> np.ndarray:
+def random_port_positions(
+    N: int,
+    cfg: SystemConfig,
+    rng: np.random.Generator,
+    max_tries: int = 2000,
+) -> np.ndarray:
     """
-    Sample N port positions uniformly in [0, L/λ] with minimum
-    inter-port spacing ≥ λ/2 (= 0.5 in wavelength units).
+    Generate a random feasible APV.
 
-    Uses rejection sampling; falls back to uniform spacing after
-    max_tries failed attempts (practically never triggered for N ≤ 12).
+    Positions:
+        x_n in [0, L]
+
+    Constraint:
+        |x_n - x_n'| >= lambda/2
+
+    Since positions are represented in wavelengths:
+        minimum separation = 0.5
     """
-    half_sep = cfg.min_sep_wl
-    L_wl     = cfg.L_wl
+    if N < 1:
+        raise ValueError("N must be >= 1.")
+
+    min_sep = cfg.min_sep_wl
+    L_wl = cfg.L_wl
+
+    # Basic feasibility check
+    required_length = (N - 1) * min_sep
+    if required_length > L_wl + 1e-12:
+        raise ValueError(
+            f"Infeasible APV: N={N}, minimum separation={min_sep}, "
+            f"aperture={L_wl} lambda."
+        )
+
     for _ in range(max_tries):
-        pts = np.sort(rng.uniform(0.0, L_wl, N))
-        if N == 1 or np.min(np.diff(pts)) >= half_sep:
+        pts = np.sort(
+            rng.uniform(0.0, L_wl, N)
+        )
+
+        if N == 1 or np.min(np.diff(pts)) >= min_sep:
             return pts
-    # Fallback
+
+    # Deterministic feasible fallback
     return uniform_port_positions(N, cfg)
 
 
-def make_channel(K: int,
-                 N: int,
-                 cfg: SystemConfig,
-                 rng: np.random.Generator,
-                 d_override: np.ndarray = None) -> tuple:
+def make_channel(
+    K: int,
+    N: int,
+    cfg: SystemConfig,
+    rng: np.random.Generator,
+    d_override: np.ndarray = None,
+) -> tuple:
     """
-    Full channel realisation: sample distances, build H with uniform APV.
+    Generate ONE complete physical channel realization.
 
-    Returns
-    -------
-    H   : (N, K) channel matrix
-    dk  : (K,) device distances
-    bk  : (K,) path-loss coefficients
-    pos : (N,) initial port positions in wavelengths
+    Returns:
+        H
+        dk
+        bk
+        pos
+        g
+        phi
+
+    g and phi must be reused whenever evaluating a different APV.
     """
-    dk, bk = sample_path_loss(K, cfg, rng, d_override)
-    pos    = uniform_port_positions(N, cfg)
-    H      = build_channel_matrix(pos, bk, K, cfg, rng)
-    return H, dk, bk, pos
+    dk, bk = sample_path_loss(
+        K,
+        cfg,
+        rng,
+        d_override,
+    )
+
+    # Initial FPA/uniform APV
+    pos = uniform_port_positions(N, cfg)
+
+    # ONE fixed channel realization
+    g, phi = sample_multipath(
+        K,
+        cfg,
+        rng,
+    )
+
+    H = build_channel_matrix(
+        pos,
+        bk,
+        K,
+        cfg,
+        g,
+        phi,
+    )
+
+    return H, dk, bk, pos, g, phi
 
 
-def make_channel_straggler(K: int,
-                           N: int,
-                           cfg: SystemConfig,
-                           rng: np.random.Generator) -> tuple:
+def make_channel_straggler(
+    K: int,
+    N: int,
+    cfg: SystemConfig,
+    rng: np.random.Generator,
+) -> tuple:
     """
-    Heterogeneous channel for straggler experiment (Section V-A):
-      - Device 0: fixed at d = 19 m
-      - Devices 1…K-1: drawn from Uniform[5, 8] m
+    Heterogeneous channel for straggler experiment.
+
+    Device 0:
+        d = 19 m
+
+    Devices 1...K-1:
+        d ~ Uniform[5, 8] m
     """
-    dk       = np.empty(K)
-    dk[0]    = cfg.straggler_dist
-    dk[1:]   = rng.uniform(cfg.straggler_near_min,
-                            cfg.straggler_near_max, K - 1)
-    _, bk    = sample_path_loss(K, cfg, rng, d_override=dk)
-    pos      = uniform_port_positions(N, cfg)
-    H        = build_channel_matrix(pos, bk, K, cfg, rng)
-    return H, dk, bk, pos
+    if K < 2:
+        raise ValueError("Straggler experiment requires K >= 2.")
+
+    dk = np.empty(K)
+    dk[0] = cfg.straggler_dist
+    dk[1:] = rng.uniform(
+        cfg.straggler_near_min,
+        cfg.straggler_near_max,
+        K - 1,
+    )
+
+    _, bk = sample_path_loss(
+        K,
+        cfg,
+        rng,
+        d_override=dk,
+    )
+
+    pos = uniform_port_positions(N, cfg)
+
+    # ONE fixed physical channel realization
+    g, phi = sample_multipath(
+        K,
+        cfg,
+        rng,
+    )
+
+    H = build_channel_matrix(
+        pos,
+        bk,
+        K,
+        cfg,
+        g,
+        phi,
+    )
+
+    return H, dk, bk, pos, g, phi

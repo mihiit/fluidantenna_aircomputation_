@@ -1,0 +1,656 @@
+==============================================================================
+FAA-AirComp EPSILON SENSITIVITY EXPERIMENT
+==============================================================================
+
+EXPERIMENT CONFIGURATION
+------------------------------------------------------------------------------
+Epsilon values = [0.04, 0.06, 0.08]
+K values = [4, 8, 12]
+N values = [4, 6, 8]
+Realizations per configuration = 30
+Total paired trials = 810
+Base seed = 20260822
+
+NON-DEGENERACY VALIDATION
+------------------------------------------------------------------------------
+K= 4 | 1/K=0.250000000 | max epsilon=0.08000 | non-degenerate=YES
+K= 8 | 1/K=0.125000000 | max epsilon=0.08000 | non-degenerate=YES
+K=12 | 1/K=0.083333333 | max epsilon=0.08000 | non-degenerate=YES
+
+GLOBAL VALIDATION
+------------------------------------------------------------------------------
+Successful realizations : 810
+Expected realizations   : 810
+Failed realizations     : 0
+
+==============================================================================
+EPSILON = 0.04
+==============================================================================
+
+K = 4, N = 4
+FAA mean energy       : 1.242601795e-03 W
+FPA mean energy       : 2.541081093e-03 W
+Mean FAA saving       : 48.4422%
+Median FAA saving     : 48.8763%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.298479298e-03 W
+95% CI difference     : [8.700237980e-04, 1.726934798e-03] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 9.258453e-07
+FAA mean iterations   : 12.100
+FPA mean iterations   : 23.800
+FAA converged         : 30/30
+FPA converged         : 7/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 6
+FAA mean energy       : 1.339292012e-03 W
+FPA mean energy       : 2.509107044e-03 W
+Mean FAA saving       : 41.3673%
+Median FAA saving     : 44.3111%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.169815032e-03 W
+95% CI difference     : [6.201511544e-04, 1.719478909e-03] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.524189e-04
+FAA mean iterations   : 13.300
+FPA mean iterations   : 23.900
+FAA converged         : 29/30
+FPA converged         : 5/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 8
+FAA mean energy       : 1.207139836e-03 W
+FPA mean energy       : 1.770183799e-03 W
+Mean FAA saving       : 27.4961%
+Median FAA saving     : 29.5307%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 5.630439628e-04 W
+95% CI difference     : [3.357849608e-04, 7.903029649e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 2.104727e-05
+FAA mean iterations   : 18.333
+FPA mean iterations   : 24.233
+FAA converged         : 22/30
+FPA converged         : 6/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 4
+FAA mean energy       : 7.667495506e-04 W
+FPA mean energy       : 1.317083860e-03 W
+Mean FAA saving       : 39.4816%
+Median FAA saving     : 37.6217%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 5.503343099e-04 W
+95% CI difference     : [4.050593448e-04, 6.956092751e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.522866e-08
+FAA mean iterations   : 9.833
+FPA mean iterations   : 22.167
+FAA converged         : 30/30
+FPA converged         : 16/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 6
+FAA mean energy       : 6.849613343e-04 W
+FPA mean energy       : 1.108631975e-03 W
+Mean FAA saving       : 37.0471%
+Median FAA saving     : 34.7062%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 4.236706409e-04 W
+95% CI difference     : [3.410587966e-04, 5.062824851e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 2.210581e-11
+FAA mean iterations   : 11.767
+FPA mean iterations   : 23.633
+FAA converged         : 29/30
+FPA converged         : 7/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 8
+FAA mean energy       : 6.282580221e-04 W
+FPA mean energy       : 8.165689365e-04 W
+Mean FAA saving       : 21.6956%
+Median FAA saving     : 20.6805%
+FAA wins              : 29/30
+FPA wins              : 1/30
+Ties                  : 0/30
+FAA win rate          : 96.67%
+Mean paired difference: 1.883109143e-04 W
+95% CI difference     : [1.255195873e-04, 2.511022414e-04] W
+Wilcoxon p            : 3.725290e-09
+Paired t-test p       : 1.104629e-06
+FAA mean iterations   : 14.367
+FPA mean iterations   : 23.200
+FAA converged         : 27/30
+FPA converged         : 9/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 4
+FAA mean energy       : 3.693166346e-04 W
+FPA mean energy       : 6.338047265e-04 W
+Mean FAA saving       : 39.6272%
+Median FAA saving     : 37.9668%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 2.644880919e-04 W
+95% CI difference     : [2.045165770e-04, 3.244596069e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 6.492060e-10
+FAA mean iterations   : 8.300
+FPA mean iterations   : 20.667
+FAA converged         : 30/30
+FPA converged         : 18/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 6
+FAA mean energy       : 2.939383367e-04 W
+FPA mean energy       : 4.591195852e-04 W
+Mean FAA saving       : 34.0055%
+Median FAA saving     : 37.5116%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.651812485e-04 W
+95% CI difference     : [1.296875577e-04, 2.006749393e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.999230e-10
+FAA mean iterations   : 8.900
+FPA mean iterations   : 20.900
+FAA converged         : 30/30
+FPA converged         : 20/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 8
+FAA mean energy       : 3.059458818e-04 W
+FPA mean energy       : 4.300787347e-04 W
+Mean FAA saving       : 28.6921%
+Median FAA saving     : 30.6594%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.241328530e-04 W
+95% CI difference     : [1.003390631e-04, 1.479266428e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.485275e-11
+FAA mean iterations   : 11.633
+FPA mean iterations   : 22.667
+FAA converged         : 30/30
+FPA converged         : 13/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+==============================================================================
+EPSILON = 0.06
+==============================================================================
+
+K = 4, N = 4
+FAA mean energy       : 6.849712557e-04 W
+FPA mean energy       : 1.292368025e-03 W
+Mean FAA saving       : 45.0524%
+Median FAA saving     : 47.5900%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 6.073967691e-04 W
+95% CI difference     : [4.194119878e-04, 7.953815503e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.046639e-07
+FAA mean iterations   : 9.900
+FPA mean iterations   : 22.133
+FAA converged         : 30/30
+FPA converged         : 16/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 6
+FAA mean energy       : 7.004447226e-04 W
+FPA mean energy       : 1.236158397e-03 W
+Mean FAA saving       : 38.6860%
+Median FAA saving     : 42.0330%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 5.357136740e-04 W
+95% CI difference     : [3.099270774e-04, 7.615002706e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.820532e-05
+FAA mean iterations   : 10.467
+FPA mean iterations   : 22.233
+FAA converged         : 29/30
+FPA converged         : 13/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 8
+FAA mean energy       : 6.871234084e-04 W
+FPA mean energy       : 9.652820101e-04 W
+Mean FAA saving       : 24.8375%
+Median FAA saving     : 24.1411%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 2.781586017e-04 W
+95% CI difference     : [1.676005036e-04, 3.887166998e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.691875e-05
+FAA mean iterations   : 13.667
+FPA mean iterations   : 22.933
+FAA converged         : 26/30
+FPA converged         : 11/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 4
+FAA mean energy       : 3.172652364e-04 W
+FPA mean energy       : 5.421793200e-04 W
+Mean FAA saving       : 39.1406%
+Median FAA saving     : 36.2075%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 2.249140835e-04 W
+95% CI difference     : [1.665532044e-04, 2.832749626e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.080963e-08
+FAA mean iterations   : 6.867
+FPA mean iterations   : 19.400
+FAA converged         : 30/30
+FPA converged         : 21/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 6
+FAA mean energy       : 2.762848775e-04 W
+FPA mean energy       : 4.319124531e-04 W
+Mean FAA saving       : 35.7403%
+Median FAA saving     : 38.0274%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.556275756e-04 W
+95% CI difference     : [1.292890523e-04, 1.819660989e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 7.635498e-13
+FAA mean iterations   : 8.300
+FPA mean iterations   : 21.167
+FAA converged         : 30/30
+FPA converged         : 16/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 8
+FAA mean energy       : 2.542508577e-04 W
+FPA mean energy       : 3.274161344e-04 W
+Mean FAA saving       : 21.8841%
+Median FAA saving     : 23.9168%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 7.316527674e-05 W
+95% CI difference     : [5.546236080e-05, 9.086819269e-05] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 2.581793e-09
+FAA mean iterations   : 9.100
+FPA mean iterations   : 20.667
+FAA converged         : 29/30
+FPA converged         : 20/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 4
+FAA mean energy       : 8.620012760e-05 W
+FPA mean energy       : 1.411386591e-04 W
+Mean FAA saving       : 37.7920%
+Median FAA saving     : 37.1770%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 5.493853154e-05 W
+95% CI difference     : [4.509624429e-05, 6.478081880e-05] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.012955e-12
+FAA mean iterations   : 5.167
+FPA mean iterations   : 14.567
+FAA converged         : 30/30
+FPA converged         : 28/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 6
+FAA mean energy       : 6.730916449e-05 W
+FPA mean energy       : 9.948495419e-05 W
+Mean FAA saving       : 31.1910%
+Median FAA saving     : 31.6398%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 3.217578970e-05 W
+95% CI difference     : [2.623969387e-05, 3.811188553e-05] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 6.054330e-12
+FAA mean iterations   : 5.867
+FPA mean iterations   : 14.767
+FAA converged         : 30/30
+FPA converged         : 25/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 8
+FAA mean energy       : 6.879425259e-05 W
+FPA mean energy       : 9.354448920e-05 W
+Mean FAA saving       : 25.1304%
+Median FAA saving     : 25.2235%
+FAA wins              : 29/30
+FPA wins              : 1/30
+Ties                  : 0/30
+FAA win rate          : 96.67%
+Mean paired difference: 2.475023661e-05 W
+95% CI difference     : [1.757638314e-05, 3.192409007e-05] W
+Wilcoxon p            : 5.587935e-09
+Paired t-test p       : 9.221717e-08
+FAA mean iterations   : 7.733
+FPA mean iterations   : 19.467
+FAA converged         : 30/30
+FPA converged         : 23/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+==============================================================================
+EPSILON = 0.08
+==============================================================================
+
+K = 4, N = 4
+FAA mean energy       : 4.247265576e-04 W
+FPA mean energy       : 7.697167027e-04 W
+Mean FAA saving       : 42.7816%
+Median FAA saving     : 43.2571%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 3.449901452e-04 W
+95% CI difference     : [2.521286153e-04, 4.378516750e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 2.237015e-08
+FAA mean iterations   : 7.167
+FPA mean iterations   : 19.600
+FAA converged         : 30/30
+FPA converged         : 21/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 6
+FAA mean energy       : 4.143013446e-04 W
+FPA mean energy       : 6.936811704e-04 W
+Mean FAA saving       : 35.9531%
+Median FAA saving     : 38.6291%
+FAA wins              : 29/30
+FPA wins              : 1/30
+Ties                  : 0/30
+FAA win rate          : 96.67%
+Mean paired difference: 2.793798257e-04 W
+95% CI difference     : [1.791311762e-04, 3.796284753e-04] W
+Wilcoxon p            : 3.725290e-09
+Paired t-test p       : 3.640225e-06
+FAA mean iterations   : 8.500
+FPA mean iterations   : 19.800
+FAA converged         : 29/30
+FPA converged         : 20/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 4, N = 8
+FAA mean energy       : 4.282461977e-04 W
+FPA mean energy       : 5.932362738e-04 W
+Mean FAA saving       : 23.2793%
+Median FAA saving     : 26.4668%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.649900761e-04 W
+95% CI difference     : [1.015781636e-04, 2.284019886e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.038285e-05
+FAA mean iterations   : 11.633
+FPA mean iterations   : 21.200
+FAA converged         : 28/30
+FPA converged         : 16/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 4
+FAA mean energy       : 1.321905615e-04 W
+FPA mean energy       : 2.181685719e-04 W
+Mean FAA saving       : 37.5217%
+Median FAA saving     : 35.8978%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 8.597801032e-05 W
+95% CI difference     : [6.696841618e-05, 1.049876045e-04] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.750361e-10
+FAA mean iterations   : 5.200
+FPA mean iterations   : 15.400
+FAA converged         : 30/30
+FPA converged         : 29/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 6
+FAA mean energy       : 1.092391925e-04 W
+FPA mean energy       : 1.740288323e-04 W
+Mean FAA saving       : 35.3700%
+Median FAA saving     : 37.5546%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 6.478963981e-05 W
+95% CI difference     : [5.094580733e-05, 7.863347230e-05] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.764634e-10
+FAA mean iterations   : 6.067
+FPA mean iterations   : 19.067
+FAA converged         : 30/30
+FPA converged         : 20/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 8, N = 8
+FAA mean energy       : 1.009967585e-04 W
+FPA mean energy       : 1.289257597e-04 W
+Mean FAA saving       : 20.8803%
+Median FAA saving     : 23.2207%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 2.792900120e-05 W
+95% CI difference     : [2.058111036e-05, 3.527689205e-05] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 1.424662e-08
+FAA mean iterations   : 7.867
+FPA mean iterations   : 17.767
+FAA converged         : 29/30
+FPA converged         : 26/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 4
+FAA mean energy       : 4.798505572e-06 W
+FPA mean energy       : 7.929523828e-06 W
+Mean FAA saving       : 36.7053%
+Median FAA saving     : 37.7236%
+FAA wins              : 29/30
+FPA wins              : 1/30
+Ties                  : 0/30
+FAA win rate          : 96.67%
+Mean paired difference: 3.131018256e-06 W
+95% CI difference     : [2.410601035e-06, 3.851435477e-06] W
+Wilcoxon p            : 3.725290e-09
+Paired t-test p       : 8.899583e-10
+FAA mean iterations   : 3.800
+FPA mean iterations   : 9.767
+FAA converged         : 30/30
+FPA converged         : 30/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 6
+FAA mean energy       : 3.657149566e-06 W
+FPA mean energy       : 5.540013713e-06 W
+Mean FAA saving       : 32.4872%
+Median FAA saving     : 35.2924%
+FAA wins              : 30/30
+FPA wins              : 0/30
+Ties                  : 0/30
+FAA win rate          : 100.00%
+Mean paired difference: 1.882864147e-06 W
+95% CI difference     : [1.507496472e-06, 2.258231822e-06] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.683253e-11
+FAA mean iterations   : 4.167
+FPA mean iterations   : 9.133
+FAA converged         : 30/30
+FPA converged         : 30/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+K = 12, N = 8
+FAA mean energy       : 3.496017474e-06 W
+FPA mean energy       : 4.823893769e-06 W
+Mean FAA saving       : 25.3800%
+Median FAA saving     : 26.5534%
+FAA wins              : 29/30
+FPA wins              : 0/30
+Ties                  : 1/30
+FAA win rate          : 96.67%
+Mean paired difference: 1.327876295e-06 W
+95% CI difference     : [9.118792498e-07, 1.743873340e-06] W
+Wilcoxon p            : 1.862645e-09
+Paired t-test p       : 3.778726e-07
+FAA mean iterations   : 4.567
+FPA mean iterations   : 10.500
+FAA converged         : 30/30
+FPA converged         : 30/30
+FAA monotone          : 30/30
+FPA monotone          : 30/30
+
+==============================================================================
+EPSILON-LEVEL AGGREGATE RESULTS
+==============================================================================
+
+Epsilon = 0.04
+Trials                  : 270
+Mean FAA energy         : 7.598003782e-04 W
+Mean FPA energy         : 1.287295528e-03 W
+Mean FAA saving         : 35.3172%
+FAA win rate            : 99.63%
+Mean paired difference  : 5.274951501e-04 W
+95% CI difference       : [4.338108753e-04, 6.211794249e-04] W
+Wilcoxon p              : 5.094888e-46
+Paired t-test p         : 9.039564e-24
+
+Epsilon = 0.06
+Trials                  : 270
+Mean FAA energy         : 3.491826559e-04 W
+Mean FPA energy         : 5.699427157e-04 W
+Mean FAA saving         : 33.2727%
+FAA win rate            : 99.63%
+Mean paired difference  : 2.207600598e-04 W
+95% CI difference       : [1.788975152e-04, 2.626226044e-04] W
+Wilcoxon p              : 5.151976e-46
+Paired t-test p         : 1.861601e-21
+
+Epsilon = 0.08
+Trials                  : 270
+Mean FAA energy         : 1.801835872e-04 W
+Mean FPA energy         : 2.884500825e-04 W
+Mean FAA saving         : 32.2620%
+FAA win rate            : 98.89%
+Mean paired difference  : 1.082664952e-04 W
+95% CI difference       : [8.661713756e-05, 1.299158529e-04] W
+Wilcoxon p              : 1.240053e-45
+Paired t-test p         : 9.852321e-20
+
+==============================================================================
+GLOBAL AGGREGATE
+==============================================================================
+All successful paired trials : 810
+Mean FAA energy              : 4.297222071e-04 W
+Mean FPA energy              : 7.152294421e-04 W
+Mean FAA saving              : 33.6173%
+FAA wins                     : 805
+FPA wins                     : 4
+Ties                         : 1
+FAA win rate                 : 99.38%
+Wilcoxon p                   : 8.592546e-134
+Paired t-test p              : 4.914577e-46
+
+==============================================================================
+INTERPRETATION
+==============================================================================
+
+This experiment tests sensitivity to epsilon.
+The same physical channel is reused across epsilon values for each realization.
+The same g and phi are reused across epsilon values for each realization.
+FAA and FPA are paired on the same physical channel at every epsilon.
+No zero-power-degenerate (K, epsilon) combination is included.
+The BCD implementation is not modified.
+The existing scaling experiment is not modified.
+
+The strongest sensitivity evidence is:
+  1. FAA remains lower-energy than FPA across epsilon.
+  2. FAA maintains a high paired win rate.
+  3. Confidence intervals remain separated from zero.
+  4. Statistical significance persists.
+  5. No unexplained feasibility failures occur.
+
+These results establish empirical sensitivity/robustness.
+They do NOT establish a theoretical scaling law.
+
+OUTPUT
+------------------------------------------------------------------------------
+CSV      : C:\Users\mihit nanda\Downloads\fluidantenna_aircomputation_1\fluidantenna_aircomputation\faa_aircomp_reproduce\output\sensitivity_experiment_eps004_006_008.csv
+Summary  : C:\Users\mihit nanda\Downloads\fluidantenna_aircomputation_1\fluidantenna_aircomputation\faa_aircomp_reproduce\output\sensitivity_experiment_eps004_006_008_summary.txt
+Progress : C:\Users\mihit nanda\Downloads\fluidantenna_aircomputation_1\fluidantenna_aircomputation\faa_aircomp_reproduce\output\sensitivity_experiment_eps004_006_008_progress.txt
+Failures : C:\Users\mihit nanda\Downloads\fluidantenna_aircomputation_1\fluidantenna_aircomputation\faa_aircomp_reproduce\output\sensitivity_experiment_eps004_006_008_failures.csv

@@ -1,0 +1,2 @@
+K,N,epsilon,realization,channel_seed,error_type,error_message
+16,4,0.08,1,21864820,RuntimeError,FAA returned non-positive energy: 0.0
